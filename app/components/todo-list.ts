@@ -14,12 +14,12 @@ export default class TodoListComponent extends Component<TodoListArgs> {
   @tracked newTodoTitle: string = '';
   @tracked todos: Todo[] = [];
 
-  get hasTodo() {
+  get hasTodo(): boolean {
     return this.todos.length > 0;
   }
 
   @action
-  addTodo() {
+  addTodo(): void {
     if (this.newTodoTitle.trim()) {
       this.todos = [
         ...this.todos,
@@ -30,24 +30,24 @@ export default class TodoListComponent extends Component<TodoListArgs> {
   }
 
   @action
-  async toggleCompleted(todo: Todo) {
+  toggleCompleted(todo: Todo): void {
     this.todos = this.todos.map((t) =>
       t === todo ? { ...t, completed: !t.completed } : t,
     );
   }
 
   @action
-  async deleteTodo(todo: Todo) {
+  deleteTodo(todo: Todo): void {
     this.todos = this.todos.filter((item) => todo.title != item.title);
   }
 
   @action
-  handleInput(e: Event) {
+  handleInput(e: Event): void {
     const target = e.target as HTMLInputElement;
     this.newTodoTitle = target.value;
   }
   @action
-  handleKeyDown(e: KeyboardEvent) {
+  handleKeyDown(e: KeyboardEvent): void {
     if (e.key == 'Enter') {
       this.addTodo();
     }

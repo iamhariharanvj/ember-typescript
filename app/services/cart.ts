@@ -5,8 +5,8 @@ import { tracked } from '@glimmer/tracking';
 export default class CartService extends Service {
   @tracked cartItems: CartItem[] = [];
 
-  addToCart(item: Product) {
-    const existingItem = this.cartItems.find(
+  addToCart(item: Product): void {
+    const existingItem: CartItem | undefined = this.cartItems.find(
       (cartItem) => item.id == cartItem.product.id,
     );
 
