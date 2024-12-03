@@ -1,0 +1,27 @@
+{{! app/templates/components/product-list.hbs }}
+<div>
+  <h1 class="text-center p-3">Products</h1>
+  <div class="product-list container d-flex overflow-y-scroll">
+    {{#each this.products as |product|}}
+      <div style="width: 18rem;" class="product-card cart m-3 rounded">
+        <img
+          class="card-img-top"
+          src={{product.imageUrl}}
+          alt={{product.name}}
+        />
+        <div class="card-body bg-light p-3">
+
+          <h3 class="card-title">{{product.name}}</h3>
+          <p class="card-text">{{product.description}}</p>
+          <p class="card-text">${{product.price}}</p>
+          <button
+            class="btn btn-primary"
+            type="button"
+            {{on "click" (fn this.addToCart product)}}
+          >Add to Cart</button>
+
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>

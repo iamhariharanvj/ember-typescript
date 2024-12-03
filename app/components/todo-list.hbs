@@ -1,0 +1,42 @@
+<div class="todo-app">
+  <h1>{{@title}}</h1>
+
+  <input
+    type="text"
+    placeholder="What needs to be done?"
+    {{on "input" this.handleInput}}
+    {{on "keydown" this.handleKeyDown}}
+  />
+
+  {{#if this.hasTodo}}
+    <ul>
+      {{#each this.todos as |todo|}}
+        <li>
+          <input
+            type="checkbox"
+            checked={{todo.completed}}
+            {{on "click" (fn this.toggleCompleted todo)}}
+          />
+          <span
+            class="{{if todo.completed 'text-success'}}"
+          >{{todo.title}}</span>
+
+          <button
+            class="btn btn-danger"
+            {{on "click" (fn this.deleteTodo todo)}}
+          >Delete</button>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p class="w-100 text-center">
+      Nothing to do!
+    </p>
+  {{/if}}
+
+  <button
+    class="btn btn-primary"
+    type="button"
+    {{on "click" (fn this.addTodo this.newTodoTitle)}}
+  >Add Todo</button>
+</div>

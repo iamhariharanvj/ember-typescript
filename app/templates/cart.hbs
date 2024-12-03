@@ -1,0 +1,45 @@
+{{page-title "Cart"}}
+<div>
+  <h1 class="text-center p-3">Cart</h1>
+  <div class="product-list container d-flex overflow-y-scroll">
+    <p
+      style="display:{{if this.isEmpty 'block' 'none'}};"
+      class="w-100 text-center"
+    >
+      Currently there are no items in the cart!
+    </p>
+
+    {{#each this.cartItems as |item|}}
+      <div style="width: 18rem;" class="product-card cart m-3 rounded">
+        <img
+          class="card-img-top"
+          src={{item.product.imageUrl}}
+          alt={{item.product.name}}
+        />
+        <div class="card-body">
+
+          <h3 class="card-title">Name: {{item.product.name}}</h3>
+          <p class="card-text">Description: {{item.product.description}}</p>
+          <p class="card-text">Price: ${{item.product.price}}</p>
+          <p class="card-text">Quantity: {{item.quantity}}</p>
+          <button
+            class="btn btn-danger"
+            type="button"
+            {{on "click" (fn this.removeFromCart item.product)}}
+          >Remove</button>
+        </div>
+      </div>
+    {{/each}}
+
+  </div>
+
+  <div
+    style="position: {{if this.isEmpty 'absolute' 'sticky'}};"
+    class="total m-0 text-white h1 text-center bottom-0 start-0 p-5 w-100 bg-dark"
+  >
+
+    Total:
+    {{this.total}}
+  </div>
+</div>
+{{outlet}}
