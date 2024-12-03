@@ -4,6 +4,7 @@
   <input
     type="text"
     placeholder="What needs to be done?"
+    value={{this.newTodoTitle}}
     {{on "input" this.handleInput}}
     {{on "keydown" this.handleKeyDown}}
   />
